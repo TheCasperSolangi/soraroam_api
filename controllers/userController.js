@@ -274,9 +274,32 @@ const updatePassword = async (req, res) => {
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
+// 📦 Fetch all users
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find().select("-password"); // Exclude passwords for security
 
+    if (!users || users.length === 0) {
+      return res.status(404).json({ message: "No users found" });
+    }
+
+    res.status(200).json({
+      success: true,
+      count: users.length,
+      users,
+    });
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    res.status(500).json({
+      message: "Server error while fetching users",
+      error: error.message,
+    });
+  }
+};
 
 // Profile
+// User routes
+router.get("/", getAllUsers);  
 router.get("/:username", getProfile);
 router.put("/:username", updateProfile);
 router.put("/:username/profile-picture", changeProfilePicture);

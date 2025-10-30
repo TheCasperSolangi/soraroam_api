@@ -148,11 +148,7 @@ class EmailService {
 
             <div class="esim-details">
                 <h3>📱 Your eSIM Details</h3>
-                
-                <div class="qr-code">
-                    <p><strong>Scan this QR Code to install your eSIM:</strong></p>
-                    <img src="{qrCodeImage}" alt="eSIM QR Code" width="200" height="200">
-                </div>
+
                 
                 <div class="activation-code">
                     <strong>Activation Code:</strong><br>

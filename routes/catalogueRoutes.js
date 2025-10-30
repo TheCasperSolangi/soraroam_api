@@ -10,6 +10,8 @@ const {
   getPaymentStatus,
   getOrderDetails,
   getEsimDetails,
+  getEsimgoCatalogueRegionalWithPricing,
+  getSpecificRegionalBundle
 } = require('../controllers/catalogueController');
 
 // Middleware for raw body parsing (needed for Stripe webhooks)
@@ -26,8 +28,9 @@ router.use(rawBodyMiddleware);
 
 // eSIM Catalogue routes
 router.get('/catalogue', getEsimgoCatalogue);
+router.get('/catalogue/regional', getEsimgoCatalogueRegionalWithPricing);
 router.get('/bundle/:name', getSpecificBundle);
-
+router.get('/regional-bundle/:name', getSpecificRegionalBundle);
 // Payment routes
 router.post('/create-payment-intent', createPaymentIntent);
 router.post('/confirm-payment', confirmPaymentAndCreateEsim);

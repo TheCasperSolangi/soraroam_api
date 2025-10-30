@@ -1,4 +1,19 @@
 const Orders = require('../models/Order');
+// Get all orders (admin or global)
+exports.getAllOrders = async (req, res) => {
+  try {
+    const orders = await Orders.find();
+
+    if (!orders || orders.length === 0) {
+      return res.status(404).json({ message: 'No orders found.' });
+    }
+
+    res.status(200).json({ orders });
+  } catch (error) {
+    console.error('Error fetching all orders:', error);
+    res.status(500).json({ message: 'Server error while fetching all orders.' });
+  }
+};
 
 // Get all orders for a specific user
 exports.getOrderByUser = async (req, res) => {
